@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SellZons Commerce Suite</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="top-nav" id="topNav">
+      <a class="logo" href="#hero" data-i18n="brand">SellZons</a>
+      <nav class="main-nav">
+        <a href="#hero" data-i18n="nav.home">Home</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="#control" data-i18n="nav.dashboard">Dashboard</a>
+        <a href="#ai" data-i18n="nav.ai">AI Studio</a>
+      </nav>
+      <div class="lang-switcher" id="languageSwitcher">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="tr">TR</button>
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="de">DE</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Global commerce automation</p>
+          <h1 data-i18n="hero.title">
+            Centralize Amazon, eBay and Etsy growth with premium automation
+          </h1>
+          <p class="subtitle" data-i18n="hero.subtitle">
+            SellZons unifies catalogue uploads, live stock & pricing, and AI-assisted optimisation in
+            one elegant workspace built for international teams.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#pricing" data-i18n="hero.ctaPrimary">Explore plans</a>
+            <a class="ghost-button" href="#control" data-i18n="hero.ctaSecondary">Go to dashboard</a>
+          </div>
+          <div class="hero-metrics" id="heroMetrics"></div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orb orb-1"></div>
+          <div class="orb orb-2"></div>
+          <div class="orb orb-3"></div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="section-header">
+          <h2 data-i18n="features.title">All-in-one marketplace operating system</h2>
+          <p data-i18n="features.subtitle">
+            Designed for global scale with multilingual workflows and AI copilots.
+          </p>
+        </div>
+        <div class="feature-grid" id="featuresGrid"></div>
+      </section>
+
+      <section id="pricing" class="section alt">
+        <div class="section-header">
+          <h2 data-i18n="pricing.title">Plans built for every stage</h2>
+          <p data-i18n="pricing.subtitle">Scale confidently with flexible AI credits.</p>
+        </div>
+        <div class="pricing-grid" id="pricingGrid"></div>
+        <div class="enterprise-card">
+          <h3 data-i18n="pricing.enterpriseTitle">Enterprise</h3>
+          <p data-i18n="pricing.enterpriseSubtitle">
+            Custom catalog operations, unlimited marketplaces and dedicated success teams.
+          </p>
+          <a class="primary-button" href="mailto:hello@sellzons.com" data-i18n="pricing.enterpriseCTA"
+            >Contact us</a
+          >
+        </div>
+      </section>
+
+      <section id="control" class="section">
+        <div class="section-header">
+          <h2 data-i18n="dashboard.title">Operate every marketplace from a single control center</h2>
+          <p data-i18n="dashboard.subtitle">
+            Monitor integrations, launch bulk updates and stay on top of catalogue performance.
+          </p>
+        </div>
+        <div class="control-layout">
+          <aside class="control-side">
+            <article class="card">
+              <div class="card-header">
+                <h3 data-i18n="dashboard.integrations.title">Integration status</h3>
+                <button id="refreshIntegrations" class="ghost-button" data-i18n="dashboard.integrations.refresh">
+                  Refresh
+                </button>
+              </div>
+              <div id="integrationStatus" class="status-grid"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <h3 data-i18n="dashboard.sync.title">Global sync</h3>
+              </div>
+              <p data-i18n="dashboard.sync.subtitle">
+                Push catalogue updates instantly across Amazon, eBay and Etsy.
+              </p>
+              <button id="syncButton" class="primary-button" data-i18n="dashboard.sync.button">
+                Sync all channels
+              </button>
+            </article>
+
+            <article class="card" id="activityLogSection">
+              <div class="card-header">
+                <h3 data-i18n="dashboard.activity.title">Activity log</h3>
+              </div>
+              <ul id="activityLog"></ul>
+            </article>
+          </aside>
+
+          <div class="control-main">
+            <article class="card table-card">
+              <div class="card-header">
+                <h3 data-i18n="dashboard.products.title">Product catalogue</h3>
+                <button id="refreshProducts" class="ghost-button" data-i18n="dashboard.products.refresh">
+                  Refresh
+                </button>
+              </div>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th data-i18n="dashboard.products.headers.sku">SKU</th>
+                      <th data-i18n="dashboard.products.headers.title">Product</th>
+                      <th data-i18n="dashboard.products.headers.price">Price</th>
+                      <th data-i18n="dashboard.products.headers.stock">Stock</th>
+                      <th data-i18n="dashboard.products.headers.channels">Channels</th>
+                      <th data-i18n="dashboard.products.headers.updated">Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody id="productTableBody"></tbody>
+                </table>
+              </div>
+            </article>
+
+            <div class="form-grid">
+              <article class="card">
+                <h3 data-i18n="dashboard.bulkUpload.title">Bulk product upload</h3>
+                <p data-i18n="dashboard.bulkUpload.subtitle">
+                  Paste an array of products that match our schema. Existing SKUs will be updated automatically.
+                </p>
+                <textarea
+                  id="bulkUploadInput"
+                  rows="10"
+                  data-i18n-placeholder="dashboard.bulkUpload.placeholder"
+                  placeholder='[
+  {"sku": "SKU-1001", "title": "Product", "price": 99.9, "stock": 10, "description": "Description", "channels": ["amazon", "etsy"]}
+]'
+                ></textarea>
+                <button id="bulkUploadButton" class="primary-button" data-i18n="dashboard.bulkUpload.button">
+                  Start upload
+                </button>
+              </article>
+
+              <article class="card">
+                <h3 data-i18n="dashboard.bulkUpdate.title">Bulk stock & price update</h3>
+                <p data-i18n="dashboard.bulkUpdate.subtitle">
+                  Provide SKU targets with price or stock adjustments to broadcast across channels.
+                </p>
+                <textarea
+                  id="bulkUpdateInput"
+                  rows="10"
+                  data-i18n-placeholder="dashboard.bulkUpdate.placeholder"
+                  placeholder='[
+  {"sku": "SKU-1001", "price": 89.9},
+  {"sku": "SKU-1002", "stock": 25}
+]'
+                ></textarea>
+                <button id="bulkUpdateButton" class="secondary-button" data-i18n="dashboard.bulkUpdate.button">
+                  Apply update
+                </button>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ai" class="section alt">
+        <div class="section-header">
+          <h2 data-i18n="ai.title">AI studio</h2>
+          <p data-i18n="ai.subtitle">
+            Optimise your catalogue with instant product diagnostics, SEO-ready listings and concept visuals.
+          </p>
+        </div>
+
+        <div class="ai-grid">
+          <article class="card">
+            <h3 data-i18n="ai.analysis.title">AI product analysis</h3>
+            <form id="analysisForm" class="stack">
+              <label>
+                <span data-i18n="ai.analysis.fields.title">Product name</span>
+                <input id="analysisTitle" type="text" required />
+              </label>
+              <label>
+                <span data-i18n="ai.analysis.fields.description">Description</span>
+                <textarea id="analysisDescription" rows="4"></textarea>
+              </label>
+              <div class="two-cols">
+                <label>
+                  <span data-i18n="ai.analysis.fields.price">Price</span>
+                  <input id="analysisPrice" type="number" min="0" step="0.01" required />
+                </label>
+                <label>
+                  <span data-i18n="ai.analysis.fields.stock">Stock</span>
+                  <input id="analysisStock" type="number" min="0" step="1" required />
+                </label>
+              </div>
+              <label>
+                <span data-i18n="ai.analysis.fields.category">Category</span>
+                <input id="analysisCategory" type="text" />
+              </label>
+              <button class="primary-button" type="submit" data-i18n="ai.analysis.button">Run analysis</button>
+            </form>
+            <div class="result" id="analysisResult"></div>
+          </article>
+
+          <article class="card">
+            <h3 data-i18n="ai.seo.title">AI SEO title & description</h3>
+            <form id="seoForm" class="stack">
+              <label>
+                <span data-i18n="ai.seo.fields.title">Base title</span>
+                <input id="seoTitle" type="text" required />
+              </label>
+              <label>
+                <span data-i18n="ai.seo.fields.description">Product description</span>
+                <textarea id="seoDescription" rows="4"></textarea>
+              </label>
+              <label>
+                <span data-i18n="ai.seo.fields.keywords">Keywords (comma separated)</span>
+                <input id="seoKeywords" type="text" />
+              </label>
+              <label>
+                <span data-i18n="ai.seo.fields.language">Language</span>
+                <select id="seoLanguage">
+                  <option value="en">English</option>
+                  <option value="tr">Türkçe</option>
+                  <option value="fr">Français</option>
+                  <option value="de">Deutsch</option>
+                </select>
+              </label>
+              <button class="secondary-button" type="submit" data-i18n="ai.seo.button">Generate copy</button>
+            </form>
+            <div class="result" id="seoResult"></div>
+          </article>
+
+          <article class="card">
+            <h3 data-i18n="ai.images.title">AI image concepts</h3>
+            <form id="imageForm" class="stack">
+              <label>
+                <span data-i18n="ai.images.fields.prompt">Prompt</span>
+                <textarea id="imagePrompt" rows="3" required></textarea>
+              </label>
+              <div class="two-cols">
+                <label>
+                  <span data-i18n="ai.images.fields.count">Image count</span>
+                  <input id="imageCount" type="number" min="1" max="10" value="2" />
+                </label>
+                <label>
+                  <span data-i18n="ai.images.fields.ratio">Aspect ratio</span>
+                  <select id="imageRatio">
+                    <option value="1:1">1:1</option>
+                    <option value="4:5">4:5</option>
+                    <option value="3:2">3:2</option>
+                    <option value="16:9">16:9</option>
+                    <option value="9:16">9:16</option>
+                  </select>
+                </label>
+              </div>
+              <button class="ghost-button" type="submit" data-i18n="ai.images.button">Generate concepts</button>
+            </form>
+            <div class="result image-result" id="imageResult"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <strong data-i18n="brand">SellZons</strong>
+        <p data-i18n="footer.tagline">Premium marketplace automation built for global brands.</p>
+      </div>
+      <div>
+        <a href="mailto:hello@sellzons.com" data-i18n="footer.contact">Contact</a>
+        <span>•</span>
+        <a href="#pricing" data-i18n="footer.pricing">Pricing</a>
+      </div>
+    </footer>
+
+    <template id="statusCardTemplate">
+      <div class="status-card">
+        <div class="status-header">
+          <span class="status-dot"></span>
+          <h3></h3>
+        </div>
+        <p class="status-detail"></p>
+        <p class="status-time"></p>
+      </div>
+    </template>
+
+    <template id="logItemTemplate">
+      <li>
+        <div class="log-title"></div>
+        <div class="log-time"></div>
+      </li>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
